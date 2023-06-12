@@ -1,25 +1,25 @@
 public class VoertuigFactory {
-    public Auto verhuurAuto(String merk, double huurprijs, double verzekeringsPrijs, int gewicht, int zitplaatsen, boolean isVerhuurd, Klant klant) {
+    public Auto verhuurAuto() {
         Auto auto = new Auto();
-        auto.setMerk(merk);
-        auto.setHuurprijs(huurprijs);
-        auto.setVerzekeringsPrijs(verzekeringsPrijs);
-        auto.setGewicht(gewicht);
-        auto.setZitplaatsen(zitplaatsen);
-        auto.setVerhuurd(isVerhuurd);
-        auto.setKlant(klant);
+        auto.setMerk("Toyota");
+        auto.setHuurprijs(50.0);
+        auto.setVerzekeringsPrijs(10.0);
+        auto.setGewicht(1500);
+        auto.setZitplaatsen(4);
+        auto.setVerhuurd(false);
+        auto.setKlant(null);
         return auto;
     }
 
-    public VrachtAuto verhuurVrachtAuto(String merk, double huurprijs, double verzekeringsPrijs, int gewicht, int laadvermogen, boolean isVerhuurd, Klant klant) {
+    public VrachtAuto verhuurVrachtAuto() {
         VrachtAuto vrachtAuto = new VrachtAuto();
-        vrachtAuto.setMerk(merk);
-        vrachtAuto.setHuurprijs(huurprijs);
-        vrachtAuto.setVerzekeringsPrijs(verzekeringsPrijs);
-        vrachtAuto.setGewicht(gewicht);
-        vrachtAuto.setLaadvermogen(laadvermogen);
-        vrachtAuto.setVerhuurd(isVerhuurd);
-        vrachtAuto.setKlant(klant);
+        vrachtAuto.setMerk("Scania");
+        vrachtAuto.setHuurprijs(100.0);
+        vrachtAuto.setVerzekeringsPrijs(20.0);
+        vrachtAuto.setGewicht(5000);
+        vrachtAuto.setLaadvermogen(10000);
+        vrachtAuto.setVerhuurd(false);
+        vrachtAuto.setKlant(null);
         return vrachtAuto;
     }
 }

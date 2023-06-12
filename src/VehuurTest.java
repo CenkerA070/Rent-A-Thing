@@ -3,41 +3,36 @@ import org.junit.Test;
 public class VehuurTest {
 
     @Test
-    public void testVerhuurAuto() {
+    public void testFactoryAuto() {
+
+        // hier testen wij het maken van een factory auto
         VoertuigFactory factory = new VoertuigFactory();
-        Klant klant = new Klant("John", "Doe");
 
-        Auto auto = factory.verhuurAuto("Mercedes", 100.0, 20.0, 1500, 4, false, klant);
-        auto.setVerzekeringsPrijs(50.0);
-        auto.setHuurprijs(50.0);
+        Auto auto = factory.verhuurAuto();
 
-        Assert.assertEquals("Mercedes", auto.getMerk());
+        Assert.assertEquals("Toyota", auto.getMerk());
         Assert.assertEquals(50.0, auto.getHuurprijs(), 0.01);
-        Assert.assertEquals(50.0, auto.getVerzekeringsPrijs(), 0.01);
-        Assert.assertEquals(100.0, auto.berekenHuurprijs(), 0.001);
-        Assert.assertEquals(1500, auto.getGewicht());
+        Assert.assertEquals(10.0, auto.getVerzekeringsPrijs(), 0.01);
+        Assert.assertEquals(1500.0, auto.getGewicht(), 0.01);
         Assert.assertEquals(4, auto.getZitplaatsen());
         Assert.assertFalse(auto.isVerhuurd());
-        Assert.assertEquals(klant, auto.getKlant());
+        Assert.assertNull(auto.getKlant());
+    }
 
-        auto.setVerhuurd(true);
-        auto.checkVerhuurd(true);
+    @Test
+    public void testFactoryVrachtAuto() {
 
-        Assert.assertTrue(auto.isVerhuurd());
+        VoertuigFactory factory = new VoertuigFactory();
 
-        auto.checkVerhuurd(false);
+        VrachtAuto vrachtAuto = factory.verhuurVrachtAuto();
 
-        Assert.assertFalse(auto.isVerhuurd());
-
-        auto.setVerzekeringsPrijs(30.0);
-        auto.checkVerzekering();
-
-        Assert.assertEquals(30.0, auto.getVerzekeringsPrijs(), 0.01);
-
-        auto.setVerzekeringsPrijs(0.0);
-        auto.checkVerzekering();
-
-        Assert.assertEquals(0.0, auto.getVerzekeringsPrijs(), 0.01);
+        Assert.assertEquals("Scania", vrachtAuto.getMerk());
+        Assert.assertEquals(100.0, vrachtAuto.getHuurprijs(), 0.01);
+        Assert.assertEquals(20.0, vrachtAuto.getVerzekeringsPrijs(), 0.01);
+        Assert.assertEquals(5000.0, vrachtAuto.getGewicht(), 0.01);
+        Assert.assertEquals(10000, vrachtAuto.getLaadvermogen());
+        Assert.assertFalse(vrachtAuto.isVerhuurd());
+        Assert.assertNull(vrachtAuto.getKlant());
     }
 
 }
