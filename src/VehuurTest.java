@@ -16,7 +16,6 @@ public class VehuurTest {
         Assert.assertEquals(1500.0, auto.getGewicht(), 0.01);
         Assert.assertEquals(4, auto.getZitplaatsen());
         Assert.assertFalse(auto.isVerhuurd());
-        Assert.assertNull(auto.getKlant());
     }
 
     @Test
@@ -32,7 +31,6 @@ public class VehuurTest {
         Assert.assertEquals(5000.0, vrachtAuto.getGewicht(), 0.01);
         Assert.assertEquals(10000, vrachtAuto.getLaadvermogen());
         Assert.assertFalse(vrachtAuto.isVerhuurd());
-        Assert.assertNull(vrachtAuto.getKlant());
     }
 
 }

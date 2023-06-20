@@ -2,25 +2,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-// VerhuurPattern (interface)
-interface VerhuurPattern {
-    double berekenHuurprijs();
+abstract class VerhuurPattern {
+   abstract double berekenHuurprijs();
 
-    void checkVerhuurd(boolean isVerhuurd);
+   abstract void checkVerhuurd(boolean isVerhuurd);
 
-    Klant getKlant();
+   abstract void getKlant();
+   abstract boolean checkVerzekering();
 
-    boolean checkVerzekering();
+   public final void procesVerhuur(boolean isVerhuurd) {
+       berekenHuurprijs();
+
+       checkVerhuurd(isVerhuurd);
+
+       getKlant();
+
+       checkVerzekering();
+   }
 }
 
 // Verhuur (abstract class implementing VerhuurPattern)
-public class Verhuur implements VerhuurPattern {
-    private String merk;
-    private double huurprijs;
-    private double verzekeringsPrijs;
-    private boolean isVerhuurd;
-    private boolean heeftVerzekering = false;
-    protected Klant klant;
+abstract class Verhuur extends VerhuurPattern   {
+    protected String merk;
+    protected double huurprijs;
+    protected double verzekeringsPrijs;
+    protected boolean isVerhuurd;
+    protected boolean heeftVerzekering;
+    protected KlantInterface klant;
 
     protected int lengtehuur;
     private List<Observer> observers = new ArrayList<>();
@@ -39,44 +47,24 @@ public class Verhuur implements VerhuurPattern {
         }
     }
 
-    public double berekenHuurprijs() {
-        if (verzekeringsPrijs > 0) {
-            huurprijs += getHuurprijs() + getVerzekeringsPrijs() * lengtehuur;
-        } else {
-            huurprijs += huurprijs * lengtehuur;
-        }
 
-        return huurprijs;
-    }
 
-    public void setKlant(Klant klant) {
+
+    public void setKlant(KlantInterface klant) {
         this.klant = klant;
     }
 
-    public Klant getKlant() {
-        return klant;
-    }
-
-    public boolean checkVerzekering() {
-        if (verzekeringsPrijs > 0) {
-            heeftVerzekering = true;
-            System.out.println("De verhuur is verzekerd.");
-        } else {
-            heeftVerzekering = false;
-            System.out.println("De verhuur is niet verzekerd.");
-        }
-
-        return heeftVerzekering;
-    }
 
     @Override
-    public void checkVerhuurd(boolean isVerhuurd) {
-        if (isVerhuurd()) {
-            isVerhuurd = true;
-        } else {
-            isVerhuurd = false;
-        }
-    }
+    abstract double berekenHuurprijs();
+    @Override
+    abstract void getKlant();
+
+    @Override
+    abstract boolean checkVerzekering();
+
+    @Override
+    abstract void checkVerhuurd(boolean isVerhuurd);
 
     public String getMerk() {
         return merk;
